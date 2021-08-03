@@ -1,7 +1,7 @@
 {
   "name": "nodejs-starter-kit",
   "version": "1.0.0",
-  "description": "",
+  "description": "A started kit for nodejs",
   "main": "index.js",
   "scripts": {
     "start": "nodemon index",
