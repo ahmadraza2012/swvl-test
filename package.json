@@ -1,7 +1,7 @@
 {
-  "name": "nodejs-starter-kit",
+  "name": "swvl-test",
   "version": "1.0.0",
-  "description": "A started kit for nodejs",
+  "description": "Notification Service",
   "main": "index.js",
   "scripts": {
     "start": "nodemon index",
@@ -17,13 +17,23 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@sendgrid/mail": "^7.4.5",
+    "amqplib": "^0.8.0",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "ejs": "^3.1.6",
     "express": "^4.17.1",
+    "express-validator": "^6.12.1",
+    "firebase-admin": "^9.11.0",
     "husky": "^7.0.1",
+    "knex": "^0.95.9",
     "morgan": "^1.10.0",
     "path": "^0.12.7",
-    "swagger-ui-express": "^4.1.6"
+    "pg": "^8.7.1",
+    "swagger-ui-express": "^4.1.6",
+    "twilio": "^3.66.1",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "eslint": "^7.32.0",

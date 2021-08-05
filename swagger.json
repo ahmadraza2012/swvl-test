@@ -13,8 +13,8 @@
     "basePath": "/",
     "tags": [
         {
-            "name": "Users",
-            "description": "API for users in the system"
+            "name": "Notification Service for SAWL test",
+            "description": "Send any kind of notifications"
         }
     ],
     "schemes": [
@@ -27,19 +27,19 @@
         "application/json"
     ],
     "paths": {
-        "/addUser": {
+        "/notify": {
             "post": {
                 "tags": [
-                    "Users"
+                    "Send Notifications"
                 ],
-                "description": "Create new user in system",
+                "description": "Notify list of users",
                 "parameters": [
                     {
-                        "name": "user",
+                        "name": "notify",
                         "in": "body",
-                        "description": "User that we want to create",
+                        "description": "Notification Message along with list of users",
                         "schema": {
-                            "$ref": "#/definitions/User"
+                            "$ref": "#/definitions/Notification"
                         }
                     }
                 ],
@@ -48,98 +48,9 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "New user is created",
+                        "description": "Recipients will be notified.",
                         "schema": {
-                            "$ref": "#/definitions/User"
-                        }
-                    }
-                }
-            }
-        },
-        "/user": {
-            "get": {
-                "tags": [
-                    "Users"
-                ],
-                "summary": "Get all users in system",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/Users"
-                        }
-                    }
-                }
-            }
-        },
-        "/user/{id}": {
-            "parameters": [
-                {
-                    "name": "id",
-                    "in": "path",
-                    "required": true,
-                    "description": "ID of user that we want to find",
-                    "type": "integer"
-                }
-            ],
-            "delete": {
-                "summary": "Delete user with given ID",
-                "tags": [
-                    "Users"
-                ],
-                "responses": {
-                    "204": {
-                        "description": "No content",
-                        "schema": {
-                            "$ref": "#/definitions/User"
-                        }
-                    }
-                }
-            },
-            "put": {
-                "summary": "Update user with give ID",
-                "tags": [
-                    "Users"
-                ],
-                "parameters": [
-                    {
-                        "name": "user",
-                        "in": "body",
-                        "description": "User with new values of properties",
-                        "schema": {
-                            "$ref": "#/definitions/updateUser"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "User is updated",
-                        "schema": {
-                            "$ref": "#/definitions/User"
-                        }
-                    }
-                }
-            },
-            "get": {
-                "summary": "Get user with give ID",
-                "tags": [
-                    "Users"
-                ],
-                "parameters": [
-                    {
-                        "name": "user",
-                        "in": "path",
-                        "description": "User with values of properties",
-                        "schema": {
-                            "$ref": "#/definitions/User"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "User is updated",
-                        "schema": {
-                            "$ref": "#/definitions/User"
+                            "$ref": "#/definitions/Notification"
                         }
                     }
                 }
@@ -147,82 +58,38 @@
         }
     },
     "definitions": {
-        "User": {
+        "Notification": {
             "required": [
-                "name",
-                "id",
-                "companies"
+                "type",
+                "message",
+                "users"
             ],
             "properties": {
-                "id": {
-                    "type": "integer",
-                    "uniqueItems": true
-                },
-                "isPublic": {
+                "type": {
                     "type": "boolean"
                 },
-                "name": {
+                "message": {
                     "type": "string"
                 },
-                "books": {
+                "users": {
                     "type": "array",
                     "items": {
                         "type": "object",
                         "properties": {
-                            "name": {
+                            "sender_id": {
                                 "type": "string"
                             },
-                            "amount": {
+                            "recepient": {
                                 "type": "number"
                             }
                         }
                     }
-                },
-                "companies": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
                 }
             }
         },
-        "updateUser": {
-            "required": [
-                "name",
-                "companies"
-            ],
-            "properties": {
-                "isPublic": {
-                    "type": "boolean"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "books": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "name": {
-                                "type": "string"
-                            },
-                            "amount": {
-                                "type": "number"
-                            }
-                        }
-                    }
-                },
-                "companies": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                }
-            }
-        },
-        "Users": {
+        "Notifications": {
             "type": "array",
-            "$ref": "#/definitions/User"
+            "$ref": "#/definitions/Notification"
         }
     }
 }
